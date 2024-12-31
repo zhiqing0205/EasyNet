@@ -35,8 +35,30 @@ After download, put the dataset in `dataset` folder.
 python utils/preprocessing.py datasets/mvtec3d/
 ```
 
+## Training
 
+### train RGB/depth branch
 
+```shell
+python trainer.py --gpu_id (your gpu id) --obj_id (dataset class id) --layer_size 2layer --mode_type RGB/Depth
+```
+
+### train fusion branch
+
+Since the reconstruction task has multiple losses that need to be optimized, the model loss convergence is difficult. It is recommended to use the training type 2 mode as the training method, and adjust the parameters of iteration step size, seed and so on according to the actual situation.
+
+train type1：
+
+```shell
+python trainer.py --gpu_id (your gpu id) --obj_id (dataset class id) --layer_size 2layer --mode_type Fusion1
+python trainer.py --gpu_id 2 --obj_id 3 --layer_size 2layer --mode_type Fusion1
+```
+
+train type2：
+
+```shell
+python trainer.py --gpu_id (your gpu id) --obj_id (dataset class id) --layer_size 2layer --mode_type Fusion2
+```
 
 ## Pretrained models
 
@@ -51,7 +73,6 @@ During the test, please test according to the corresponding training mode, that 
 ```shell
 python test.py --gpu_id 0 --obj_id -1 --layer_size 2layer --mode_type Fusion1
 python test.py --gpu_id 0 --obj_id -1 --layer_size 2layer --mode_type RGB
-
 ```
 
 ## Citations
@@ -68,4 +89,3 @@ numpages = {9},
 series = {MM '23}
 }
 ```
-
